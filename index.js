@@ -11,6 +11,10 @@ const connection = mysql.createPool({
 });
 
 app.get('/', (req, res) => {
+  res.send('Hello World');
+});
+
+app.get('/students', (req, res) => {
   connection.query('SELECT * FROM Student', (err, rows) => {
     if (err) {
       res.json({
