@@ -6,9 +6,9 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . ./
+RUN echo 'hello'
 
-EXPOSE 5001
+COPY . ./
 
 # CMD ["npm", "start"]
 CMD [ "npm", "run", "start:dev" ]

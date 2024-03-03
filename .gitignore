@@ -2,3 +2,5 @@ node_modules
 db/data/*
 
 !db/data/.gitkeep
+
+.env

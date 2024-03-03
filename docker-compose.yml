@@ -4,23 +4,28 @@ services:
     volumes:
       - '/etc/timezone:/etc/timezone:ro'
       - '/etc/localtime:/etc/localtime:ro'
+    env_file:
+      - .env
     build: ./db
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE_NAME}
     restart: always
     ports:
-      - '3306:3306'
+      - '${MYSQL_PORT}:${MYSQL_PORT}'
   web:
     build: ./api
+    env_file:
+      - .env
     environment:
-      MYSQL_DATABASE: test
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
-      MYSQL_HOST: db
+      MYSQL_DATABASE: ${MYSQL_DATABASE_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: ${MYSQL_HOST}
+      PORT: ${TEST_PORT}
       NODE_ENV: development
     ports:
-      - '5001:5001'
+      - '${TEST_PORT}:${TEST_PORT}'
     depends_on:
       - db
     volumes:

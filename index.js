@@ -1,17 +1,18 @@
 const express = require('express');
 const mysql = require('mysql');
 const app = express();
+require('dotenv').config();
 
 const connection = mysql.createPool({
   connectionLimit: 10,
-  host: process.env.MYSQL_HOST || 'localhost',
-  user: process.env.MYSQL_USER || 'root',
-  password: process.env.MYSQL_PASSWORD || 'password',
-  database: process.env.MYSQL_DATABASE || 'test',
+  host: process.env.MYSQL_HOST,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
 });
 
 app.get('/', (req, res) => {
-  res.send('Hello World');
+  res.send('Hello World 2');
 });
 
 app.get('/students', (req, res) => {
@@ -30,4 +31,5 @@ app.get('/students', (req, res) => {
   });
 });
 
-app.listen(5001, () => console.log('listening on port 5001'));
+const port = process.env.PORT || 5001;
+app.listen(port, () => console.log(`listening on port ${port}`));
