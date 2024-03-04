@@ -1,6 +1,6 @@
 FROM node:15-alpine
 
-WORKDIR /api
+WORKDIR /dockerApiFolder
 
 COPY package*.json ./
 
