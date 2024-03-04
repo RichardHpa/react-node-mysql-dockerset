@@ -6,7 +6,9 @@ services:
       - '/etc/localtime:/etc/localtime:ro'
     env_file:
       - .env
-    build: ./db
+    build:
+      context: ./db
+      dockerfile: Dockerfile
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE_NAME}
@@ -14,12 +16,14 @@ services:
     ports:
       - '${MYSQL_PORT}:${MYSQL_PORT}'
   web:
-    build: ./api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
     env_file:
       - .env
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE_NAME}
-      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_USER: root
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_HOST: ${MYSQL_HOST}
       PORT: ${TEST_PORT}
