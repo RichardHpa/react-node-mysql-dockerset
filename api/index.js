@@ -2,6 +2,9 @@ const express = require('express');
 const mysql = require('mysql');
 const app = express();
 require('dotenv').config();
+const cors = require('cors');
+
+app.use(cors());
 
 const connection = mysql.createPool({
   connectionLimit: 10,
@@ -12,7 +15,7 @@ const connection = mysql.createPool({
 });
 
 app.get('/', (req, res) => {
-  res.send('Hello World 2');
+  res.send('Hello World 3');
 });
 
 app.get('/students', (req, res) => {

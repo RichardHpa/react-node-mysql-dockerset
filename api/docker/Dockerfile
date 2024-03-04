@@ -6,8 +6,6 @@ COPY package*.json ./
 
 RUN npm install
 
-RUN echo 'hello'
-
 COPY . ./
 
 # CMD ["npm", "start"]
